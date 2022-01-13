@@ -17,16 +17,19 @@ export const StyledApp = styled.div`
     max-width: 1280px;
     padding: var(--gap);
     width: 100%;
-
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     grid-template-rows: 1fr; 
-    gap: 0px 0px; 
+    gap: var(--gap); 
     grid-template-areas: ". ."; 
 
-.column {
-    
-}
+    h1, h2 {
+        margin: 0 0 var(--gapLarge) 0;
+    }
+
+    .column {
+        max-width: 500px;
+    }
 
     .fetching {
         color: var(--colorWarning);

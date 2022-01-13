@@ -20,9 +20,9 @@ function App() {
       <div className="column">
         {isFetching && <div className='fetching'>Updating data</div>}
 
-        {/* Date change is not implemented */}
         <h1>Foreign exchange market rates</h1>
 
+        {/* Date change is not implemented */}
         <div className="date-select">
           <span>Select date:</span>
           <DatePicker selected={new Date(date)} onChange={handleDateChange} disabled />
@@ -41,7 +41,7 @@ function App() {
 
   /**
    * On date change reload data from api.
-   * Reload can be achieved if date is set to state variable and the variable is set in useQuery key array.
+   * Reload can be achieved if date is set to state variable and the variable is provided to useQuery key array.
    */
   function handleDateChange() {
     throw new Error('Function not implemented.');
