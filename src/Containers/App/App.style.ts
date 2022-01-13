@@ -46,9 +46,5 @@ export const StyledApp = styled.div`
         justify-content: flex-start;
         max-width: 500px;
         margin: auto;
-
-        input:disabled {
-            cursor: not-allowed;
-        }
     }
 `;

@@ -5,10 +5,18 @@ export const StyledRateCalculator = styled.div`
     border: 1px solid var(--colorGray2);
     margin: var(--gap) auto;
     max-width: 500px;
+    padding: var(--gap);
     width: 100%;
 
-    .text-flag-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .value-currency-group {
         display: flex;
-        width: 50%;
+        width: 45%;
+    }
+    .equal {
+
     }
 `;

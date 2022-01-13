@@ -15,10 +15,10 @@
   --gap: 16px;
   --gapLarge: 24px;
 
-  --borderRadius: 6px;
+  --borderRadius: 4px;
 }
 
-/* Document styles */
+/* Document global styles */
 body {
   margin: 0;
   padding: 0;
@@ -28,4 +28,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--colorGray4);
+}
+
+input {
+  border: 1px solid var(--colorGray2);
+  border-radius: var(--borderRadius);
+  padding: calc(var(--gap) / 4);
+}
+input:disabled {
+  cursor: not-allowed;
 }
