@@ -55,3 +55,13 @@ export const removeDiacritics = (inputText: string) => {
 
     return r;
 }
+
+/**
+ * Parse czech date format
+ * @param date 
+ */
+export const parseDate = (date: string): { day: number, month: number, year: number } => {
+    const d = date.split('.');
+
+    return { day: Number(d[0]), month: Number(d[1]) - 1, year: Number(d[2]) };
+}

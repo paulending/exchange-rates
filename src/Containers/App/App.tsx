@@ -6,6 +6,7 @@ import { getCurrencyRates } from '../../Services/Api';
 import RateCalculator from '../RateCalculator';
 import { StyledApp } from './App.style';
 import DatePicker from "react-datepicker";
+import { parseDate } from '../../helpers';
 
 function App() {
   const { isLoading, error, data, isFetching } = useQuery<any, Error>("rates", getCurrencyRates);
@@ -15,6 +16,8 @@ function App() {
   if (error) return <>An error has occurred: {error.message}</>;
 
   const { date, headers, rates } = data;
+
+  const dateArray = parseDate(date);
   return (
     <StyledApp>
       <div className="column">
@@ -24,8 +27,8 @@ function App() {
 
         {/* Date change is not implemented */}
         <div className="date-select">
-          <span>Select date:</span>
-          <DatePicker selected={new Date(date)} onChange={handleDateChange} disabled />
+          <span>Select date:&nbsp;</span>
+          <DatePicker selected={new Date(dateArray.year, dateArray.month, dateArray.day)} onChange={handleDateChange} disabled />
         </div>
 
         <Rates rates={rates} headers={headers} />
