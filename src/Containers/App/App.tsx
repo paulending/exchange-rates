@@ -12,7 +12,9 @@ function App() {
   const { isLoading, error, data, isFetching } = useQuery<any, Error>("rates", getCurrencyRates);
   const [targetCurrency, setTargetCurrency] = useState<string>('');
 
-  if (isLoading) return <Loader />;
+
+
+  if (!isLoading) return <Loader text={'Downloading exchange rates'} />;
 
   if (error) return <>An error has occurred: {error.message}</>;
 
