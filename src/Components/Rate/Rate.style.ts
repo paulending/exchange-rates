@@ -8,4 +8,10 @@ export const StyledRate = styled.tr`
     &:nth-child(even) td {
         background: var(--colorGray1);
     }
+
+    &.selected {
+        td {
+            background: var(--colorSecondary);
+        }
+    }
 `;

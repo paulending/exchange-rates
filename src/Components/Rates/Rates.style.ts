@@ -6,11 +6,13 @@ export const StyledRates = styled.div`
     margin: var(--gap) auto;
     max-width: 500px;
     width: 100%;
-    
+    box-shadow: 0px 0px 8px 0px #8F8F8F;
+
     table {
         border-collapse: collapse;
         border: 0;
         width: 100%;
+        
     }
 
     th {
@@ -28,5 +30,9 @@ export const StyledRates = styled.div`
         &:last-child {
             border-top-right-radius: var(--borderRadius);
         }
+    }
+
+    td {
+        padding: calc(var(--gap) / 4);
     }
 `;

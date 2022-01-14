@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import Loader from '../../Components/Loader';
 import Rates from '../../Components/Rates';
@@ -10,6 +10,7 @@ import { parseDate } from '../../helpers';
 
 function App() {
   const { isLoading, error, data, isFetching } = useQuery<any, Error>("rates", getCurrencyRates);
+  const [targetCurrency, setTargetCurrency] = useState<string>('');
 
   if (isLoading) return <Loader />;
 
@@ -20,25 +21,36 @@ function App() {
   const dateArray = parseDate(date);
   return (
     <StyledApp>
-      <div className="column">
-        {isFetching && <div className='fetching'>Updating data</div>}
+      <header>
+        <h1>Foreign exchange market rates of CZK</h1>
+      </header>
+      <div className="app-content">
+        <section className="column">
+          {isFetching && <div className='fetching'>Updating data</div>}
 
-        <h1>Foreign exchange market rates</h1>
+          <h2>Exchange rate overview</h2>
 
-        {/* Date change is not implemented */}
-        <div className="date-select">
-          <span>Select date:&nbsp;</span>
-          <DatePicker selected={new Date(dateArray.year, dateArray.month, dateArray.day)} onChange={handleDateChange} disabled />
-        </div>
+          {/* Date change is not implemented */}
+          <div className="date-select">
+            <span>Select date:&nbsp;</span>
+            <DatePicker selected={new Date(dateArray.year, dateArray.month, dateArray.day)} onChange={handleDateChange} disabled />
+          </div>
 
-        <Rates rates={rates} headers={headers} />
+          <Rates rates={rates} headers={headers} targetCurrency={targetCurrency} />
+        </section>
+
+        <section className="column">
+          <h2>Exchange rate calculator</h2>
+          <RateCalculator
+            rates={rates}
+            targetCurrency={targetCurrency}
+            onTargetCurrencyChange={setTargetCurrency}
+          />
+        </section>
       </div>
-
-      <div className="column">
-        <h2>Exchange rate calculator</h2>
-        <RateCalculator rates={rates} />
-      </div>
-
+      <footer>
+        Source of rates: <a href="https://www.cnb.cz/">ČNB</a>
+      </footer>
     </StyledApp>
   );
 

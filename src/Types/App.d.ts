@@ -1,7 +1,13 @@
-
-export interface CurrencyRates {
+export type TRate = {
+    zeme: string;
+    mena: string;
+    mnozstvi: number;
+    kod: string;
+    kurz: number;
+}
+export interface TCurrencyRates {
     date: string;
     number: number;
     headers: string[];
-    rates: any[]; // type any because properties names are parsed from data
+    rates: Rate[];
 }

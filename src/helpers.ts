@@ -1,24 +1,29 @@
-import { CurrencyRates } from "./Types/App";
+import { TCurrencyRates, TRate } from "./Types/App";
 
 /**
  * Parse date, rates number in year and particular currency rates from string
  * @param data 
  * @returns 
  */
-export const parseDataObject = (data: string): CurrencyRates => {
+export const parseDataObject = (data: string): TCurrencyRates => {
     const rows = data.trim().split('\n');
 
     const date = rows[0].split(' ')[0];
     const number = Number(rows[0].split('#')[1]);
     const headers = rows[1].split('|');
-    let rates: any = [];
+    let rates: TRate[] = [];
 
     for (var i = 2; i < rows.length; i++) {
         const splitRow = rows[i].split('|');
         let obj: any = {};
 
         for (var j = 0; j < splitRow.length; j++) {
-            obj[removeDiacritics(headers[j].trim())] = splitRow[j].trim();
+            const key = removeDiacritics(headers[j].trim());
+            let value: any = splitRow[j].trim();
+            if (key === 'mnozstvi') value = parseInt(splitRow[j].trim());
+            if (key === 'kurz') value = parseFloat(splitRow[j].trim().replace(',', '.'));
+
+            obj[key] = value;
         }
 
         rates.push(obj);
