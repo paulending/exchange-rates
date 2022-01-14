@@ -15,13 +15,13 @@ const Rates: React.FC<RatesProps> = ({ headers, rates, targetCurrency }) => {
             <table>
                 <thead>
                     <tr>
-                        {headers.map((h: string) => <th key={`table-header-${h}`}>{h}</th>)}
+                        {headers?.map((h: string) => <th key={`table-header-${h}`}>{h}</th>)}
                     </tr>
                 </thead>
 
                 <tbody>
-                    {rates.length > 0 ?
-                        rates.map((rate: TRate) =>
+                    {rates?.length > 0 ?
+                        rates?.map((rate: TRate) =>
                             <Rate
                                 key={`table-row-${rate.kod}`}
                                 parentKey={`table-row-${rate.kod}`}

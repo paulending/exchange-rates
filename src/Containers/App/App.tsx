@@ -7,18 +7,20 @@ import RateCalculator from '../RateCalculator';
 import { StyledApp } from './App.style';
 import DatePicker from "react-datepicker";
 import { parseDate } from '../../helpers';
+import ErrorInfo from '../../Components/Error';
+
 
 function App() {
   const { isLoading, error, data, isFetching } = useQuery<any, Error>("rates", getCurrencyRates);
   const [targetCurrency, setTargetCurrency] = useState<string>('');
 
+  if (isLoading) return <Loader text={'Downloading exchange rates'} />;
 
+  const { date, headers, rates } = data || {};
 
-  if (!isLoading) return <Loader text={'Downloading exchange rates'} />;
+  if (error) return <ErrorInfo text={error.message} />;
+  if (!date || !headers || !rates) return <ErrorInfo text={'It looks like there are no data.'} />
 
-  if (error) return <>An error has occurred: {error.message}</>;
-
-  const { date, headers, rates } = data;
 
   const dateArray = parseDate(date);
   return (

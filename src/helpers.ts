@@ -8,7 +8,7 @@ import { TCurrencyRates, TRate } from "./Types/App";
 export const parseDataObject = (data: string): TCurrencyRates => {
     const rows = data.trim().split('\n');
 
-    const date = rows[0].split(' ')[0];
+    const date = rows[0].split(' ')[0] ?? '';
     const number = Number(rows[0].split('#')[1]);
     const headers = rows[1].split('|');
     let rates: TRate[] = [];
@@ -38,7 +38,6 @@ export const parseDataObject = (data: string): TCurrencyRates => {
  * @returns 
  */
 export const removeDiacritics = (inputText: string) => {
-
     var r = inputText.toLowerCase();
     r = r.replace(new RegExp(/\s/g), "-");
     r = r.replace(new RegExp(/[àáâãäå]/g), "a");
@@ -56,8 +55,6 @@ export const removeDiacritics = (inputText: string) => {
     r = r.replace(new RegExp(/[ůùúûü]/g), "u");
     r = r.replace(new RegExp(/[ýÿ]/g), "y");
     r = r.replace(new RegExp(/[ž]/g), "z");
-    // r = r.replace(new RegExp(/\W/g), ""); //non-word character //BOHUŽEL i "-"
-
     return r;
 }
 
@@ -65,8 +62,10 @@ export const removeDiacritics = (inputText: string) => {
  * Parse czech date format
  * @param date 
  */
-export const parseDate = (date: string): { day: number, month: number, year: number } => {
+export const parseDate = (date?: string): { day: number, month: number, year: number } => {
+    if (!date) return { day: 0, month: 0, year: 0 };
+
     const d = date.split('.');
 
-    return { day: Number(d[0]), month: Number(d[1]) - 1, year: Number(d[2]) };
+    return { day: parseInt(d[0]), month: parseInt(d[1]) - 1, year: parseInt(d[2]) };
 }

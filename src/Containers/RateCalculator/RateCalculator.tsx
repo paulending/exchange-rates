@@ -10,12 +10,11 @@ interface RateCalculatorProps {
 }
 
 const RateCalculator: React.FC<RateCalculatorProps> = ({ rates, targetCurrency, onTargetCurrencyChange }) => {
-    const currencies = rates.map((r: TRate) => r.kod);
-
     const [lastValue, setLastValue] = useState(0);
     const [lastValueIsSource, setLastValueIsSource] = useState(false);
 
-    const rate = rates.find((r: TRate) => r.kod === targetCurrency);
+    const currencies = rates?.map((r: TRate) => r.kod);
+    const rate = rates?.find((r: TRate) => r.kod === targetCurrency);
 
     let sourceValue = 0;
     let targetValue = 0;
