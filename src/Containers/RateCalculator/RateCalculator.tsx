@@ -19,12 +19,14 @@ const RateCalculator: React.FC<RateCalculatorProps> = ({ rates, targetCurrency, 
     let sourceValue = 0;
     let targetValue = 0;
     if (rate) {
+        console.log('lastValue: ', lastValue);
+        console.log('rate: ', rate);
         if (lastValueIsSource) {
             sourceValue = lastValue;
-            targetValue = rate?.kurz / rate?.mnozstvi * lastValue;
+            targetValue = lastValue * rate?.mnozstvi / rate?.kurz;
         }
         else {
-            sourceValue = rate?.kurz / rate?.mnozstvi * lastValue;
+            sourceValue = lastValue * rate?.kurz / rate?.mnozstvi;
             targetValue = lastValue;
         }
     }
